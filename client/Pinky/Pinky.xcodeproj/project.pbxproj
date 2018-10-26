@@ -16,6 +16,12 @@
 		3B4266D9218314C300AEA2B4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B4266D7218314C300AEA2B4 /* LaunchScreen.storyboard */; };
 		3B4266E4218314C300AEA2B4 /* PinkyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4266E3218314C300AEA2B4 /* PinkyTests.swift */; };
 		3B4266EF218314C300AEA2B4 /* PinkyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4266EE218314C300AEA2B4 /* PinkyUITests.swift */; };
+		3B4267002183485C00AEA2B4 /* Archive.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B4266FF2183485C00AEA2B4 /* Archive.storyboard */; };
+		3B426702218348B200AEA2B4 /* Setting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B426701218348B200AEA2B4 /* Setting.storyboard */; };
+		3B42670921834A8F00AEA2B4 /* TimeLine.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B42670821834A8F00AEA2B4 /* TimeLine.storyboard */; };
+		3B42670B21834C0500AEA2B4 /* TimeLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B42670A21834C0500AEA2B4 /* TimeLine.swift */; };
+		3B42670D21834C5200AEA2B4 /* Archive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B42670C21834C5200AEA2B4 /* Archive.swift */; };
+		3B42670F21834C6A00AEA2B4 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B42670E21834C6A00AEA2B4 /* Setting.swift */; };
 		4CA528C75916A54A7AA91864 /* Pods_PinkyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0CE204E1C9A083EF4CC0B09 /* Pods_PinkyUITests.framework */; };
 		7FF32699975FE709FF8BC0AC /* Pods_Pinky.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CE9D03DC08ED7937716AADE /* Pods_Pinky.framework */; };
 /* End PBXBuildFile section */
@@ -55,6 +61,12 @@
 		3B4266EA218314C300AEA2B4 /* PinkyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PinkyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B4266EE218314C300AEA2B4 /* PinkyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinkyUITests.swift; sourceTree = "<group>"; };
 		3B4266F0218314C300AEA2B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3B4266FF2183485C00AEA2B4 /* Archive.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Archive.storyboard; sourceTree = "<group>"; };
+		3B426701218348B200AEA2B4 /* Setting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Setting.storyboard; sourceTree = "<group>"; };
+		3B42670821834A8F00AEA2B4 /* TimeLine.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TimeLine.storyboard; sourceTree = "<group>"; };
+		3B42670A21834C0500AEA2B4 /* TimeLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLine.swift; sourceTree = "<group>"; };
+		3B42670C21834C5200AEA2B4 /* Archive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Archive.swift; sourceTree = "<group>"; };
+		3B42670E21834C6A00AEA2B4 /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
 		9CE9D03DC08ED7937716AADE /* Pods_Pinky.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pinky.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9BEB13511072566B99DF9C1 /* Pods-Pinky.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pinky.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pinky/Pods-Pinky.release.xcconfig"; sourceTree = "<group>"; };
 		DC3FAF2275A7FCCBDB327CA1 /* Pods-PinkyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PinkyUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PinkyUITests/Pods-PinkyUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -118,7 +130,7 @@
 			children = (
 				3B4266CB218314C100AEA2B4 /* AppDelegate.swift */,
 				3B4266CD218314C100AEA2B4 /* ViewController.swift */,
-				3B4266CF218314C100AEA2B4 /* Main.storyboard */,
+				3B4267032183494700AEA2B4 /* View */,
 				3B4266D5218314C300AEA2B4 /* Assets.xcassets */,
 				3B4266D7218314C300AEA2B4 /* LaunchScreen.storyboard */,
 				3B4266DA218314C300AEA2B4 /* Info.plist */,
@@ -144,6 +156,46 @@
 			);
 			path = PinkyUITests;
 			sourceTree = "<group>";
+		};
+		3B4267032183494700AEA2B4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3B4266CF218314C100AEA2B4 /* Main.storyboard */,
+				3B42670721834A7100AEA2B4 /* TimeLineView */,
+				3B426705218349D100AEA2B4 /* ArchiveView */,
+				3B42670621834A1500AEA2B4 /* SettingView */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		3B426705218349D100AEA2B4 /* ArchiveView */ = {
+			isa = PBXGroup;
+			children = (
+				3B4266FF2183485C00AEA2B4 /* Archive.storyboard */,
+				3B42670C21834C5200AEA2B4 /* Archive.swift */,
+			);
+			name = ArchiveView;
+			path = Pinky/View/ArchiveView;
+			sourceTree = SOURCE_ROOT;
+		};
+		3B42670621834A1500AEA2B4 /* SettingView */ = {
+			isa = PBXGroup;
+			children = (
+				3B426701218348B200AEA2B4 /* Setting.storyboard */,
+				3B42670E21834C6A00AEA2B4 /* Setting.swift */,
+			);
+			path = SettingView;
+			sourceTree = "<group>";
+		};
+		3B42670721834A7100AEA2B4 /* TimeLineView */ = {
+			isa = PBXGroup;
+			children = (
+				3B42670821834A8F00AEA2B4 /* TimeLine.storyboard */,
+				3B42670A21834C0500AEA2B4 /* TimeLine.swift */,
+			);
+			name = TimeLineView;
+			path = Pinky/View/TimeLineView;
+			sourceTree = SOURCE_ROOT;
 		};
 		412C61CB79D093637F2B21AE /* Frameworks */ = {
 			isa = PBXGroup;
@@ -276,9 +328,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B4267002183485C00AEA2B4 /* Archive.storyboard in Resources */,
 				3B4266D9218314C300AEA2B4 /* LaunchScreen.storyboard in Resources */,
 				3B4266D6218314C300AEA2B4 /* Assets.xcassets in Resources */,
+				3B42670921834A8F00AEA2B4 /* TimeLine.storyboard in Resources */,
 				3B4266D1218314C100AEA2B4 /* Main.storyboard in Resources */,
+				3B426702218348B200AEA2B4 /* Setting.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -398,6 +453,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B42670D21834C5200AEA2B4 /* Archive.swift in Sources */,
+				3B42670B21834C0500AEA2B4 /* TimeLine.swift in Sources */,
+				3B42670F21834C6A00AEA2B4 /* Setting.swift in Sources */,
 				3B4266CE218314C100AEA2B4 /* ViewController.swift in Sources */,
 				3B4266CC218314C100AEA2B4 /* AppDelegate.swift in Sources */,
 				3B4266D4218314C100AEA2B4 /* Pinky.xcdatamodeld in Sources */,
