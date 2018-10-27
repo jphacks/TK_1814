@@ -50,6 +50,10 @@ def get_promise_content(letter):
                     hour = entity_response["ne_list"][i][0][0:j]
                     hour_n = j
 
+                    # 約束内容の要素番号を算出
+                    time = entity_response["ne_list"][i][0]
+                    index = letter.find(time) + len(time)
+
                     if j != time_len - 1:
                         if entity_response["ne_list"][i][0][j + 1] == u"半":
                             min = "30"
@@ -57,17 +61,13 @@ def get_promise_content(letter):
                 elif entity_response["ne_list"][i][0][j] == u"分":
                     min = entity_response["ne_list"][i][0][hour_n + 1:j]
 
-            # 約束内容の要素番号を算出
-            time = entity_response["ne_list"][i][0]
-            index = letter.find(time) + len(time)
-
         elif entity_response["ne_list"][i][1] == "LOC":
             place = entity_response["ne_list"][i][0]
 
     # 約束内容を出力
     # 約束内容の最初の文字に格助詞が入ってるか調べる
     morph_response = api.morph(sentence=letter[index:len(letter)])
-    if morph_response["word_list"][0][0][1] == u"格助詞":
+    if morph_response["word_list"][0][0][1] == u"格助詞" or morph_response["word_list"][0][0][1] == u"読点":
         par_len = len(morph_response["word_list"][0][0][0])
 
         content = letter[index + par_len:len(letter)]
