@@ -107,3 +107,5 @@ uploads
 fixtures
 .idea
 views/test.py
+demon/*.service
+demon/*.sh
