@@ -117,14 +117,24 @@ class TimeLine: UIViewController, UITableViewDelegate, UITableViewDataSource{
                 completionHandler(true)
             })
         
-        if count{
+        
+        if pro[indexPath.row].one_side_done == 0 {
             check.title = "Check"
             check.image = UIImage(named: "check")
             check.backgroundColor = UIColor(hex: "DB4F4A")
         }else{
-            check.title = "Checked"
-            check.image = UIImage(named: "cancel")
-            check.backgroundColor = UIColor(hex: "4A4A4A")
+            if pro[indexPath.row].one_side_done == myID{
+                self.count = false
+                check.title = "Checked"
+                check.image = UIImage(named: "cancel")
+                check.backgroundColor = UIColor(hex: "4A4A4A")
+            }else{
+                self.count = true
+                check.title = "Check"
+                check.image = UIImage(named: "check")
+                check.backgroundColor = UIColor(hex: "DB4F4A")
+            }
+            
         }
         
         let confrigation = UISwipeActionsConfiguration(actions: [check])
