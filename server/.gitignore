@@ -106,3 +106,4 @@ config.py
 uploads
 fixtures
 .idea
+views/test.py
