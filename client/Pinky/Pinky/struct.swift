@@ -6,15 +6,11 @@
 //  Copyright © 2018 山川拓也. All rights reserved.
 //
 
-struct Promise : Codable{
+struct Promise{
     let content : String
     let created_at : String
     let img : String
     let is_master : Bool
     let limited_at : String
     let name : String
-}
-
-struct Promises : Codable{
-    let promises : [Promise]
 }
