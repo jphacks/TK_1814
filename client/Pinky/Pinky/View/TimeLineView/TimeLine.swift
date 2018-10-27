@@ -17,6 +17,8 @@ class TimeLine: UIViewController, UITableViewDelegate, UITableViewDataSource{
     @IBOutlet weak var timeline: UITableView!
     
     let url = "https://pinky.kentaiwami.jp/promise/9"
+    let myID = 9 //仮ID
+    
     var pro : [Promise] = []
     var count = true
     private weak var refreshControl: UIRefreshControl!
@@ -34,7 +36,6 @@ class TimeLine: UIViewController, UITableViewDelegate, UITableViewDataSource{
         callAPI()
 //        let calender = Calender()
 //        calender.listEvents()
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -55,6 +56,10 @@ class TimeLine: UIViewController, UITableViewDelegate, UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: "TimeLineCell") as! TimeLineCell
         
         cell.profileName.text = pro[indexPath.row].name
+        cell.profileName.layer.masksToBounds = true
+        cell.profileName.layer.cornerRadius = 10
+        cell.profileName.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        
         cell.promise.text = pro[indexPath.row].content
         cell.DateTime.text = pro[indexPath.row].created_at + "に約束しました"
         
@@ -72,15 +77,21 @@ class TimeLine: UIViewController, UITableViewDelegate, UITableViewDataSource{
         
         let filter = AspectScaledToFillSizeWithRoundedCornersFilter(
             size: cell.profileImg.frame.size,
-            radius: 40.0
+            radius: 10.0
         )
         cell.profileImg.af_setImage(withURL: URL(string: pro[indexPath.row].img)!, filter: filter)
         
-        if pro[indexPath.row].one_side_done != 0 {
-            cell.compLabel.isHidden = false
-        }else{
+        if pro[indexPath.row].one_side_done == 0 {
             cell.compLabel.isHidden = true
+        }else{
+            if pro[indexPath.row].one_side_done == myID{
+                self.count = false
+            }else{
+                self.count = true
+            }
+            cell.compLabel.isHidden = false
         }
+        
         return cell
     }
     
@@ -97,8 +108,10 @@ class TimeLine: UIViewController, UITableViewDelegate, UITableViewDataSource{
                 //do stuff
                 if self.count {
                     self.count = false
+                    
+                    self.putAPI(user_id: self.myID, index: indexPath.row)
                 }else{
-                    self.show_alert()
+                    self.show_alert(index: indexPath.row)
                 }
 
                 completionHandler(true)
@@ -124,10 +137,10 @@ class TimeLine: UIViewController, UITableViewDelegate, UITableViewDataSource{
             .responseJSON{res in
                 
                 let json = JSON(res.value)
-                print(json)
                 let list = json["results"].arrayValue
                 (0 ..< list.count).forEach { (i) in
-                    var tmp = Promise(content: list[i]["content"].stringValue,
+                    var tmp = Promise(id: list[i]["id"].intValue,
+                                    content: list[i]["content"].stringValue,
                                       calender_date: list[i]["calender_date"].stringValue,
                                       created_at: list[i]["created_at"].stringValue,
                                       img: list[i]["img"].stringValue,
@@ -142,7 +155,7 @@ class TimeLine: UIViewController, UITableViewDelegate, UITableViewDataSource{
         }
     }
     
-    func show_alert() {
+    func show_alert(index: Int) {
         let alert: UIAlertController = UIAlertController(title: "達成の取り消し", message: "取り消しますか？", preferredStyle:  UIAlertController.Style.alert)
         
 
@@ -150,6 +163,7 @@ class TimeLine: UIViewController, UITableViewDelegate, UITableViewDataSource{
             // ボタンが押された時の処理を書く（クロージャ実装）
             (action: UIAlertAction!) -> Void in
             self.count = true
+            self.putAPI(user_id: -1, index: index)
             print("OK")
         })
         // キャンセルボタン
@@ -164,6 +178,25 @@ class TimeLine: UIViewController, UITableViewDelegate, UITableViewDataSource{
         alert.addAction(defaultAction)
         
         present(alert, animated: true, completion: nil)
+    }
+    
+    func putAPI(user_id: Int, index: Int) {
+        let putURL = "https://pinky.kentaiwami.jp/promise"
+        let params = [
+            "user_id": user_id,
+            "promise_id": self.pro[index].id
+        ]
+        
+        Alamofire.request(
+            putURL,
+            method: .put,
+            parameters: params,
+            encoding: JSONEncoding(options: [])).responseJSON {
+                (response) in
+                // レスポンスの結果を受け取る(Any型)
+                print(response.value)
+        }
+        self.refresh()
     }
     
     /********************* Pull to refresh関連 *********************/

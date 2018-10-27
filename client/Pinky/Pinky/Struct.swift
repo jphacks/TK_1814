@@ -7,6 +7,7 @@
 //
 
 struct Promise{
+    let id : Int
     let content : String
     let calender_date : String
     let created_at : String
