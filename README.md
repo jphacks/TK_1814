@@ -3,7 +3,7 @@
 [![Product Name](image.png)](https://www.youtube.com/watch?v=G5rULR53uMk)
 
 ## 製品概要
-###約束 X Tech
+### 約束 X Tech
 
 ### 背景（製品開発のきっかけ、課題等）
 友人や恋人、仕事仲間と会った時にする何気ない口約束、例えば「A君に1000円返す」といった約束をふと忘れることがありませんか？  
