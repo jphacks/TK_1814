@@ -4,22 +4,23 @@ sys.path.append('/home/kenta/pinky')
 from itertools import groupby
 import time
 from database import session
-from model import User, Motion, Promise
-import datetime
+from model import Motion, Promise
 
 
-def sample():
+def run_loop():
     while True:
         filepath = '/home/kenta/pinky/demon/test.log'
         log_file = open(filepath,'a')
+        matching()
         try:
-            log_file.write(time.ctime()+"\n")
+            pass
+            # log_file.write(time.ctime()+"\n")
         finally:
             log_file.close()
-            time.sleep(3)
+            time.sleep(5)
 
 
-def sample2():
+def matching():
     all_motion = session.query(Motion).all()
     user_motion = {}
     delete_motion_list = []
@@ -30,7 +31,6 @@ def sample2():
 
         for motion in motions:
             tmp_motion_list.append(motion)
-            # delete_motion_list.append(motion)
 
         user_motion[user_id] = tmp_motion_list
 
@@ -45,7 +45,7 @@ def sample2():
             user_id_list.append(user_id)
 
     print(user_id_list)
-    print('HOGEHOGE: ', delete_motion_list)
+    print('delete_motion_list: ', delete_motion_list)
 
     matching_results = []
 
@@ -82,10 +82,14 @@ def sample2():
     session.bulk_save_objects(updates)
 
     for motion in delete_motion_list:
+        print('*****************')
+        print(motion.created_at, motion.user_id)
+        print('*****************')
         session.delete(motion)
 
     session.commit()
     session.close()
 
+
 if __name__ == '__main__':
-    sample2()
+    run_loop()
