@@ -1,9 +1,9 @@
-from flask import Blueprint, jsonify, request, abort
+from flask import Blueprint, jsonify, request
 from database import session
 from model import User, Promise
 from sqlalchemy import or_
 from config import HOST_TOP
-import inspect
+
 
 app = Blueprint('promise_bp', __name__)
 
@@ -65,7 +65,6 @@ def put():
         msg = '片方が承認しました'
     elif promise.one_side_done_user_id == request.json['user_id']:
         msg = '何もしないよ'
-        pass
     else:
         promise.one_side_done_user_id = None
         promise.is_done = True
