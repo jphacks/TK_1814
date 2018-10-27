@@ -4,12 +4,14 @@ PODS:
     - Alamofire (~> 4.7)
   - Nuke (7.5)
   - SwiftyJSON (4.2.0)
+  - SwipeCellKit (2.5.0)
 
 DEPENDENCIES:
   - Alamofire
   - AlamofireImage
   - Nuke
   - SwiftyJSON
+  - SwipeCellKit
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -17,13 +19,15 @@ SPEC REPOS:
     - AlamofireImage
     - Nuke
     - SwiftyJSON
+    - SwipeCellKit
 
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   AlamofireImage: 78d67ccbb763d87ba44b21583d2153500a195630
   Nuke: 799c0430f87b11c4dacfa80b13e1c4f0a1464b90
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
+  SwipeCellKit: d8f2617538ce3021cb0a11d1b93856a06a2f2e20
 
-PODFILE CHECKSUM: 3492b2c95495eae9106ef15d39726628101e321b
+PODFILE CHECKSUM: faec8ac3d857c1e75b92872ffa70013900519c0f
 
 COCOAPODS: 1.5.3
