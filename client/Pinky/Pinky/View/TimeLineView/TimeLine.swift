@@ -26,35 +26,7 @@ class TimeLine: UIViewController, UITableViewDelegate, UITableViewDataSource{
         self.timeline.delegate = self
         self.timeline.dataSource = self
         
-        //Alamofire
-//        Alamofire.request(url, method: .get).responseJSON {
-//            (response) in
-//            // レスポンスの結果を受け取る(Any型)
-//            print(response.value)
-//
-//            // レスポンスの結果をパース(JSON型)
-//            let json = JSON(response.value)
-//        }
-        
-        Alamofire.request(url)
-            .responseJSON{res in
-                
-                let json = JSON(res.value)
-                let list = json["results"].arrayValue
-                (0 ..< list.count).forEach { (i) in
-                    var tmp = Promise(content: list[i]["content"].stringValue,
-                                      created_at: list[i]["created_at"].stringValue,
-                                      img: list[i]["img"].stringValue,
-                                      is_master: list[i]["is_master"].boolValue,
-                                      limited_at: list[i]["limited_at"].stringValue,
-                                      name: list[i]["name"].stringValue
-                                      )
-                    self.pro.append(tmp)
-                }
-
-                
-               self.timeline.reloadData()
-        }
+        callAPI()
 
     }
     
@@ -74,8 +46,6 @@ class TimeLine: UIViewController, UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TimeLineCell") as! TimeLineCell
         
-//        cell.profileName.text = String(indexPath.row + 1)
-//        cell.promise.text = self.hoge[indexPath.row]
         cell.profileName.text = pro[indexPath.row].name
         cell.promise.text = pro[indexPath.row].content
         cell.DateTime.text = pro[indexPath.row].created_at + "に約束しました"
@@ -86,7 +56,6 @@ class TimeLine: UIViewController, UITableViewDelegate, UITableViewDataSource{
             cell.deliver.text = pro[indexPath.row].limited_at
         }
 
-        
         if pro[indexPath.row].is_master {
             cell.promiseArrow.image = UIImage(named: "right")
         }else{
@@ -106,6 +75,26 @@ class TimeLine: UIViewController, UITableViewDelegate, UITableViewDataSource{
         
         // タップ時の処理を記述
         
+    }
+    
+    func callAPI(){
+        Alamofire.request(url)
+            .responseJSON{res in
+                
+                let json = JSON(res.value)
+                let list = json["results"].arrayValue
+                (0 ..< list.count).forEach { (i) in
+                    var tmp = Promise(content: list[i]["content"].stringValue,
+                                      created_at: list[i]["created_at"].stringValue,
+                                      img: list[i]["img"].stringValue,
+                                      is_master: list[i]["is_master"].boolValue,
+                                      limited_at: list[i]["limited_at"].stringValue,
+                                      name: list[i]["name"].stringValue
+                    )
+                    self.pro.append(tmp)
+                }
+                self.timeline.reloadData()
+        }
     }
     
 }
