@@ -18,8 +18,10 @@ class TimeLine: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
     let url = "https://pinky.kentaiwami.jp/promise/9"
     var pro : [Promise] = []
-    
+    var count = true
     private weak var refreshControl: UIRefreshControl!
+    
+    var transRotate = CGAffineTransform()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +40,7 @@ class TimeLine: UIViewController, UITableViewDelegate, UITableViewDataSource{
     override func viewWillAppear(_ animated: Bool) {
         let titleview = UIImageView(image: UIImage(named: "pinky_header"))
         self.navigationItem.titleView = titleview
-        refresh()
+        //refresh()
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -83,36 +85,31 @@ class TimeLine: UIViewController, UITableViewDelegate, UITableViewDataSource{
         
     }
     
-//    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]?
-//    {
-//        let delete = TableViewRowAction(style: UITableViewRowAction.Style.default, title: "hoge") { action, indexPath in }
-//        delete.image = UIImage(named: "check")
-//
-//        let sharing = TableViewRowAction(style: UITableViewRowAction.Style.default, title: "huga") { action, indexPath in }
-//        sharing.backgroundColor = UIColor.lightGray
-//        sharing.image = UIImage(named: "comp")
-//
-//        return [delete, sharing]
-//    }
     @available(iOS 11.0, *)
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-        let check =  UIContextualAction(style: .normal, title: "Check", handler: { (action,view,completionHandler ) in
-            //do stuff
-            
-            completionHandler(true)
-        })
-        check.image = UIImage(named: "check")
-        check.backgroundColor = UIColor(hex: "DB4F4A")
+            let check =  UIContextualAction(style: .normal, title: "Check", handler: { (action,view,completionHandler ) in
+                //do stuff
+                if self.count {
+                    self.count = false
+                }else{
+                    self.count = true
+                }
+
+                completionHandler(true)
+            })
         
-        let comp =  UIContextualAction(style: .normal, title: "Complete", handler: { (action,view,completionHandler ) in
-            //do stuff
-            completionHandler(true)
-        })
-        comp.image = UIImage(named: "comp")
-        comp.backgroundColor = UIColor(hex: "4A4A4A")
+        if count{
+            check.title = "Check"
+            check.image = UIImage(named: "check")
+            check.backgroundColor = UIColor(hex: "DB4F4A")
+        }else{
+            check.title = "Checked"
+            check.image = UIImage(named: "cancel")
+            check.backgroundColor = UIColor(hex: "4A4A4A")
+        }
         
-        let confrigation = UISwipeActionsConfiguration(actions: [check, comp])
+        let confrigation = UISwipeActionsConfiguration(actions: [check])
         
         return confrigation
     }
@@ -130,6 +127,7 @@ class TimeLine: UIViewController, UITableViewDelegate, UITableViewDataSource{
                                       img: list[i]["img"].stringValue,
                                       is_master: list[i]["is_master"].boolValue,
                                       limited_at: list[i]["limited_at"].stringValue,
+                                      one_side_done: list[i]["one_side_done"].boolValue,
                                       name: list[i]["name"].stringValue
                     )
                     self.pro.append(tmp)
@@ -157,7 +155,6 @@ class TimeLine: UIViewController, UITableViewDelegate, UITableViewDataSource{
         }
     }
     
-    // MARK: - Data Flow
     private func refresh() {
         DispatchQueue.global().async {
             Thread.sleep(forTimeInterval: 1.0)
