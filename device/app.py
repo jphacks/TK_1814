@@ -4,6 +4,7 @@ import numpy as np
 from time import sleep
 import RPi.GPIO as GPIO
 import datetime
+import requests
 
 MICPIN = 4
 SPICS = 8
@@ -55,7 +56,9 @@ def record():
   for i in range(0, int(RATE / CHUNK * RECORD_SECONDS)):
       data = stream.read(CHUNK, exception_on_overflow = False)
       buf = np.frombuffer(data, dtype="int16") # 読み込んだストリームデータを2byteのInt型のリストに分離
+      frames.append(b''.join(buf[::3])) # 記録するデータを1/3に間引いてリストを結合してフレームに追加
 
+      
   print("* done recording")
 
   stream.stop_stream()
@@ -71,7 +74,16 @@ def record():
   
   status = 'PROMISE'
 
+  status = 'PROMISE'
+  URL = 'https://pinky.kentaiwami.jp/record'
+  files = {'wav': open(WAVE_OUTPUT_FILENAME, 'rb')}
+  data = {'id': '9'}
+  r = requests.post(URL, files=files, data=data)
+  print(r)
+  print(r.json())
+  #TODO 返ってきたidを保存する処理(この後の、振動検知時に投げるのに使用)
 
+  
 def readadc(adcnum):
     global SPICS
     global SPIMISO
