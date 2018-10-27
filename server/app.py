@@ -4,7 +4,7 @@ from flask_basicauth import BasicAuth
 from flask_migrate import Migrate
 from model import db
 from config import secret_key
-from views import test
+from views import test, record
 from admin import init_admin
 # from flask_pushjack import FlaskAPNS
 
@@ -23,7 +23,7 @@ def init_app():
 
 def add_bp(app_obj):
     modules_define = [
-        test.app
+        test.app, record.app
     ]
 
     for bp_app in modules_define:
