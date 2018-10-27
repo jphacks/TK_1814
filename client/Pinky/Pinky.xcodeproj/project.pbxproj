@@ -23,6 +23,8 @@
 		3B42670D21834C5200AEA2B4 /* Archive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B42670C21834C5200AEA2B4 /* Archive.swift */; };
 		3B42670F21834C6A00AEA2B4 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B42670E21834C6A00AEA2B4 /* Setting.swift */; };
 		3B4267192184041100AEA2B4 /* TimeLineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4267182184041100AEA2B4 /* TimeLineCell.swift */; };
+		3B4267232184082300AEA2B4 /* splash_color.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B4267212184082300AEA2B4 /* splash_color.png */; };
+		3B4267242184082300AEA2B4 /* splash_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B4267222184082300AEA2B4 /* splash_white.png */; };
 		4CA528C75916A54A7AA91864 /* Pods_PinkyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0CE204E1C9A083EF4CC0B09 /* Pods_PinkyUITests.framework */; };
 		7FF32699975FE709FF8BC0AC /* Pods_Pinky.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CE9D03DC08ED7937716AADE /* Pods_Pinky.framework */; };
 /* End PBXBuildFile section */
@@ -69,6 +71,8 @@
 		3B42670C21834C5200AEA2B4 /* Archive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Archive.swift; sourceTree = "<group>"; };
 		3B42670E21834C6A00AEA2B4 /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
 		3B4267182184041100AEA2B4 /* TimeLineCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLineCell.swift; sourceTree = "<group>"; };
+		3B4267212184082300AEA2B4 /* splash_color.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash_color.png; sourceTree = "<group>"; };
+		3B4267222184082300AEA2B4 /* splash_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash_white.png; sourceTree = "<group>"; };
 		9CE9D03DC08ED7937716AADE /* Pods_Pinky.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pinky.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9BEB13511072566B99DF9C1 /* Pods-Pinky.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pinky.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pinky/Pods-Pinky.release.xcconfig"; sourceTree = "<group>"; };
 		DC3FAF2275A7FCCBDB327CA1 /* Pods-PinkyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PinkyUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PinkyUITests/Pods-PinkyUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -134,6 +138,8 @@
 				3B4266CD218314C100AEA2B4 /* ViewController.swift */,
 				3B4267032183494700AEA2B4 /* View */,
 				3B4266D5218314C300AEA2B4 /* Assets.xcassets */,
+				3B4267212184082300AEA2B4 /* splash_color.png */,
+				3B4267222184082300AEA2B4 /* splash_white.png */,
 				3B4266D7218314C300AEA2B4 /* LaunchScreen.storyboard */,
 				3B4266DA218314C300AEA2B4 /* Info.plist */,
 				3B4266D2218314C100AEA2B4 /* Pinky.xcdatamodeld */,
@@ -334,8 +340,10 @@
 				3B4267002183485C00AEA2B4 /* Archive.storyboard in Resources */,
 				3B4266D9218314C300AEA2B4 /* LaunchScreen.storyboard in Resources */,
 				3B4266D6218314C300AEA2B4 /* Assets.xcassets in Resources */,
+				3B4267232184082300AEA2B4 /* splash_color.png in Resources */,
 				3B42670921834A8F00AEA2B4 /* TimeLine.storyboard in Resources */,
 				3B4266D1218314C100AEA2B4 /* Main.storyboard in Resources */,
+				3B4267242184082300AEA2B4 /* splash_white.png in Resources */,
 				3B426702218348B200AEA2B4 /* Setting.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
