@@ -78,8 +78,20 @@ class TimeLine: UIViewController, UITableViewDelegate, UITableViewDataSource{
 //        cell.promise.text = self.hoge[indexPath.row]
         cell.profileName.text = pro[indexPath.row].name
         cell.promise.text = pro[indexPath.row].content
-        cell.DateTime.text = pro[indexPath.row].created_at
-        cell.deliver.text = pro[indexPath.row].limited_at
+        cell.DateTime.text = pro[indexPath.row].created_at + "に約束しました"
+        
+        if pro[indexPath.row].limited_at == "" {
+            cell.deliver.text = "期限なし"
+        }else{
+            cell.deliver.text = pro[indexPath.row].limited_at
+        }
+
+        
+        if pro[indexPath.row].is_master {
+            cell.promiseArrow.image = UIImage(named: "right")
+        }else{
+             cell.promiseArrow.image = UIImage(named: "left")
+        }
         
         let filter = AspectScaledToFillSizeWithRoundedCornersFilter(
             size: cell.profileImg.frame.size,
