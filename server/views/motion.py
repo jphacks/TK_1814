@@ -10,6 +10,7 @@ from datetime import datetime as DT
 app = Blueprint('motion_bp', __name__)
 
 
-@app.route('/record', methods=['POST'])
+@app.route('/motion', methods=['POST'])
 def post():
+
     return jsonify({'results': 'OK'}), 200

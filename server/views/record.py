@@ -14,7 +14,7 @@ app = Blueprint('record_bp', __name__)
 def get_promise_content(letter):
     api = GoolabsAPI(GOO_API_KEY)
     index = 0
-    letter = "明日の13時半に岩見と一緒に東京駅に来て"
+    # letter = "クリスマスに岩見と一緒に東京駅に来て"
     # 時刻情報正規化API
     # chrono_response = api.chrono(sentence=letter)
     # 固有表現抽出API
@@ -25,17 +25,20 @@ def get_promise_content(letter):
     date = ''
     hour = ''
     min = ''
+    place = ''
 
     for i in range(len(entity_response["ne_list"])):
 
         # 日付の抽出
         if entity_response["ne_list"][i][1] == "DAT":
             day_response = api.chrono(sentence=entity_response["ne_list"][i][0])
-            date = day_response["datetime_list"][0][1]
 
-            # 約束内容の要素番号を算出
-            day = entity_response["ne_list"][i][0]
-            index = letter.find(day) + len(day)
+            if len(day_response['datetime_list']) != 0:
+                date = day_response["datetime_list"][0][1]
+
+                # 約束内容の要素番号を算出
+                day = entity_response["ne_list"][i][0]
+                index = letter.find(day) + len(day)
 
         # 時間の抽出
         elif entity_response["ne_list"][i][1] == "TIM":
@@ -58,6 +61,9 @@ def get_promise_content(letter):
             time = entity_response["ne_list"][i][0]
             index = letter.find(time) + len(time)
 
+        elif entity_response["ne_list"][i][1] == "LOC":
+            place = entity_response["ne_list"][i][0]
+
     # 約束内容を出力
     # 約束内容の最初の文字に格助詞が入ってるか調べる
     morph_response = api.morph(sentence=letter[index:len(letter)])
@@ -68,7 +74,7 @@ def get_promise_content(letter):
     else:
         content = letter[index:len(letter)]
 
-    return {'date': date, 'hour': hour, 'min': min, 'content': content}
+    return {'date': date, 'hour': hour, 'min': min, 'content': content, 'place': place}
 
 
 @app.route('/record', methods=['POST'])
@@ -112,9 +118,12 @@ def post():
     session.commit()
     session.close()
 
-    return jsonify({'promise': {
-        'id': new_promise.id,
-        'limit_date': str(new_promise.limit_date),
-        'content': new_promise.content,
-        'full_text': r.json()['text']
-    }})
+    return jsonify({
+        'promise': {
+            'id': new_promise.id,
+            'limit_date': '' if limit is None else str(new_promise.limit_date),
+            'content': new_promise.content,
+            'full_text': r.json()['text']
+        },
+        'results': results
+    })

@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify
 from database import session
 from model import User, Promise
 from sqlalchemy import or_
+from config import HOST_TOP
 
 app = Blueprint('promise_bp', __name__)
 
@@ -22,7 +23,7 @@ def get(user_id):
         results.append({
             'created_at': promise.created_at.strftime('%Y年%m月%d日'),
             'limited_at': '' if promise.limit_date is None else promise.limit_date.strftime('%Y年%m月%d日'),
-            'img': user.profile,
+            'img': '{}/{}'.format(HOST_TOP, user.profile),
             'name': user.name,
             'content': promise.content,
             'is_master': True if str(promise.master_user_id) == str(user_id) else False,
