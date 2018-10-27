@@ -46,11 +46,6 @@ def put():
 
     promise = session.query(Promise).filter(Promise.id == request.json['promise_id']).one_or_none()
 
-    if not (promise.master_user_id == request.json['user_id'] or promise.slave_user_id == request.json['user_id']):
-        session.close()
-        return jsonify({'results': '権限なし'}), 403
-
-
     if request.json['user_id'] == -1:
         promise.one_side_done_user_id = None
 
@@ -58,6 +53,11 @@ def put():
         session.close()
 
         return jsonify({'results': '約束の承認を解除'}), 200
+
+
+    if not (promise.master_user_id == request.json['user_id'] or promise.slave_user_id == request.json['user_id']):
+        session.close()
+        return jsonify({'results': '権限なし'}), 403
 
 
     if promise.one_side_done_user_id is None:
