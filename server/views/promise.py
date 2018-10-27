@@ -1,24 +1,19 @@
-from flask import Blueprint, jsonify, request
-import requests
+from flask import Blueprint, jsonify
 from database import session
 from model import User, Promise
-import os
-import uuid
-from goolabs import GoolabsAPI
-from config import GOO_API_KEY, DOCOMO_API_KEY
-from datetime import datetime as DT
 from sqlalchemy import or_
 
 app = Blueprint('promise_bp', __name__)
 
-@app.route('/promise/<id>', methods=['GET'])
-def get(id):
-    # id    ユーザID
+
+@app.route('/promise/<user_id>', methods=['GET'])
+def get(user_id):
+    # user_id    ユーザID
 
     promises = session.query(Promise, User).filter(
-        or_(Promise.master_user_id == id, Promise.slave_user_id == id),
+        or_(Promise.master_user_id == user_id, Promise.slave_user_id == user_id),
         or_(User.id == Promise.master_user_id, User.id == Promise.slave_user_id),
-        User.id != id,
+        User.id != user_id,
         Promise.is_done == False
     ).all()
 
@@ -30,7 +25,7 @@ def get(id):
             'img': user.profile,
             'name': user.name,
             'content': promise.content,
-            'is_master': True if str(promise.master_user_id) == str(id) else False,
+            'is_master': True if str(promise.master_user_id) == str(user_id) else False,
         })
 
     return jsonify({'results': results})
