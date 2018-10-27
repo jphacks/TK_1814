@@ -8,6 +8,9 @@ target 'Pinky' do
   pod 'Nuke'
   pod "Alamofire"
   pod 'SwiftyJSON'
+  pod 'AlamofireImage'
+  pod 'SwipeCellKit'
+
 
   # Pods for Pinky
 
