@@ -8,6 +8,7 @@
 
 struct Promise{
     let content : String
+    let calender_date : String
     let created_at : String
     let img : String
     let is_master : Bool

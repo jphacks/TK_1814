@@ -18,21 +18,26 @@ class TimeLine: UIViewController, UITableViewDelegate, UITableViewDataSource{
     let url = "https://pinky.kentaiwami.jp/promise/9"
     var pro : [Promise] = []
     
-    let hoge = ["ほげ","Hello,World!","testなんやで"]
+    private weak var refreshControl: UIRefreshControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        initializePullToRefresh()
         
         self.timeline.delegate = self
         self.timeline.dataSource = self
         
         callAPI()
+//        let calender = Calender()
+//        calender.listEvents()
 
     }
     
     override func viewWillAppear(_ animated: Bool) {
         let titleview = UIImageView(image: UIImage(named: "pinky_header"))
         self.navigationItem.titleView = titleview
+        refresh()
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -85,6 +90,7 @@ class TimeLine: UIViewController, UITableViewDelegate, UITableViewDataSource{
                 let list = json["results"].arrayValue
                 (0 ..< list.count).forEach { (i) in
                     var tmp = Promise(content: list[i]["content"].stringValue,
+                                      calender_date: list[i]["calender_date"].stringValue,
                                       created_at: list[i]["created_at"].stringValue,
                                       img: list[i]["img"].stringValue,
                                       is_master: list[i]["is_master"].boolValue,
@@ -97,4 +103,42 @@ class TimeLine: UIViewController, UITableViewDelegate, UITableViewDataSource{
         }
     }
     
+    /********************* Pull to refresh関連 *********************/
+    private func initializePullToRefresh() {
+        let control = UIRefreshControl()
+        control.addTarget(self, action: #selector(onPullToRefresh(_:)), for: .valueChanged)
+        timeline.addSubview(control)
+        refreshControl = control
+    }
+    
+    @objc private func onPullToRefresh(_ sender: AnyObject) {
+        refresh()
+        
+    }
+    
+    private func stopPullToRefresh() {
+        if refreshControl.isRefreshing {
+            refreshControl.endRefreshing()
+        }
+    }
+    
+    // MARK: - Data Flow
+    private func refresh() {
+        DispatchQueue.global().async {
+            Thread.sleep(forTimeInterval: 1.0)
+            DispatchQueue.main.async {
+                self.completeRefresh()
+            }
+        }
+    }
+    
+    private func completeRefresh() {
+        stopPullToRefresh()
+        self.pro.removeAll()
+        callAPI()
+        timeline.reloadData()
+//        let calender = Calender()
+//        calender.addEvent(limited_at: <#T##String#>, title: <#T##String#>, endDate: <#T##String#>)
+    }
+    /********************************************************/
 }

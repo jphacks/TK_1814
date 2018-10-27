@@ -42,7 +42,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="aKv-AX-PxX"/>
                     </view>
-                    <tabBarItem key="tabBarItem" systemItem="history" id="cim-pc-3bt"/>
+                    <tabBarItem key="tabBarItem" title="Archive" image="archive" id="cim-pc-3bt"/>
                     <navigationItem key="navigationItem" id="G6p-qf-Rtg"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
@@ -69,4 +69,7 @@
             <point key="canvasLocation" x="-84" y="125.4872563718141"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="archive" width="30" height="30"/>
+    </resources>
 </document>

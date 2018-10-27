@@ -16,6 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="selectedImageTintColor" red="0.85882352939999995" green="0.30980392159999998" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="bZ2-yK-h81" kind="relationship" relationship="viewControllers" id="dmC-Xf-gIW"/>
@@ -31,7 +32,9 @@
         <scene sceneID="fqd-1S-bY3">
             <objects>
                 <viewControllerPlaceholder storyboardName="TimeLine" id="bZ2-yK-h81" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="mostViewed" id="L8a-pI-upq"/>
+                    <tabBarItem key="tabBarItem" title="Timeline" image="timeline" id="L8a-pI-upq">
+                        <color key="badgeColor" red="0.85882352939999995" green="0.30980392159999998" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </tabBarItem>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NWg-cm-24C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -41,7 +44,7 @@
         <scene sceneID="n7b-U1-9Lg">
             <objects>
                 <viewControllerPlaceholder storyboardName="Archive" id="rZr-SQ-ewJ" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="history" id="QuK-Xw-XRV"/>
+                    <tabBarItem key="tabBarItem" title="Archive" image="archive" id="QuK-Xw-XRV"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gdx-Oe-oYA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -51,11 +54,16 @@
         <scene sceneID="y7S-cI-6kt">
             <objects>
                 <viewControllerPlaceholder storyboardName="Setting" id="wB9-6I-90v" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="contacts" id="bna-ee-dww"/>
+                    <tabBarItem key="tabBarItem" title="Setting" image="setting" id="bna-ee-dww"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Egb-qQ-f3m" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="450" y="22"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="archive" width="30" height="30"/>
+        <image name="setting" width="30" height="30"/>
+        <image name="timeline" width="30" height="30"/>
+    </resources>
 </document>

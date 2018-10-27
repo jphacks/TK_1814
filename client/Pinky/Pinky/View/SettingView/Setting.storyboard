@@ -28,7 +28,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="6mP-Xr-eeH"/>
                     </view>
-                    <tabBarItem key="tabBarItem" systemItem="contacts" id="UrS-2w-z5i"/>
+                    <tabBarItem key="tabBarItem" title="Setting" image="setting" id="UrS-2w-z5i"/>
                     <navigationItem key="navigationItem" id="fGy-Kk-8Yd"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
@@ -55,4 +55,7 @@
             <point key="canvasLocation" x="125.59999999999999" y="115.59220389805098"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="setting" width="30" height="30"/>
+    </resources>
 </document>

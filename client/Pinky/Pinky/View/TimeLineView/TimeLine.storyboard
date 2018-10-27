@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Time Line-->
+        <!--timeline-->
         <scene sceneID="zkO-4R-kP4">
             <objects>
                 <viewController id="xQF-VA-nGh" customClass="TimeLine" customModule="Pinky" customModuleProvider="target" sceneMemberID="viewController">
@@ -91,7 +91,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="Ylx-P4-M4N"/>
                     </view>
-                    <tabBarItem key="tabBarItem" systemItem="mostViewed" id="Sbw-9e-fvx"/>
+                    <tabBarItem key="tabBarItem" title="timeline" image="timeline" id="Sbw-9e-fvx">
+                        <color key="badgeColor" red="0.85882352939999995" green="0.30980392159999998" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </tabBarItem>
                     <navigationItem key="navigationItem" id="lGL-L9-VBG"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -124,5 +126,6 @@
     <resources>
         <image name="clock" width="24" height="24"/>
         <image name="pencil" width="24" height="20"/>
+        <image name="timeline" width="30" height="30"/>
     </resources>
 </document>
