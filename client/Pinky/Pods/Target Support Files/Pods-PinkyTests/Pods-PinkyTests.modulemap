@@ -1,0 +1,6 @@
+framework module Pods_PinkyTests {
+  umbrella header "Pods-PinkyTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
