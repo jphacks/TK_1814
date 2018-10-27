@@ -3,6 +3,7 @@ import wave
 import numpy as np
 from time import sleep
 import RPi.GPIO as GPIO
+import datetime
 
 MICPIN = 4
 SPICS = 8
@@ -108,6 +109,38 @@ def readadc(adcnum):
     GPIO.output(SPICS, GPIO.HIGH)
     return adcout  
 
+def checkTouch():
+  global axisVal
+  global numOfTouch
+  global touchLogList
+  global status
+
+  axisVal[0] = readadc(0)
+  axisVal[1] = readadc(1)
+  axisVal[2] = readadc(2)
+
+  if axisPrevVal[0] != 0.0:
+    if numOfTouch < 2:
+      if axisVal[0] - axisPrevVal[0] > 1000 or axisVal[1] - axisPrevVal[1] > 1000 or axisVal[2] - axisPrevVal[2] > 1000:
+        numOfTouch = numOfTouch + 1
+        now = datetime.datetime.now()
+        nowStr = now.strftime("%Y/%m/%d %H:%M:%S.%L")
+        touchLog = 'touch{}:{}'.format(numOfTouch, now)
+        touchLogList.append(touchLog)
+        print("yay its touching!!")
+        sleep(1)
+
+    if numOfTouch == 2:
+       status = 'WAIT'
+       print(touchLogList)
+
+  axisPrevVal[0] = axisVal[0]
+  axisPrevVal[1] = axisVal[1]
+  axisPrevVal[2] = axisVal[2]
+  print(axisVal)
+  print(axisPrevVal)
+  sleep(0.2)
+
   
 def micCallback(channnel):
   record()
@@ -117,12 +150,17 @@ def checkLED():
      GPIO.output(LEDPIN, GPIO.HIGH)
   elif status == 'RECORD':
      GPIO.output(LEDPIN, GPIO.LOW)
+  elif status == 'PROMISE':
+     #TODO: チカチカ点滅する処理
+     GPIO.output(LEDPIN, GPIO.HIGH)
 
 GPIO.add_event_detect(MICPIN, GPIO.RISING, callback=micCallback, bouncetime=300)
 
 try:
   while True:
     checkLED()
+    if status == 'PROMISE':
+      checkTouch()
     sleep(0.01)
 
 except KeyboardInterrupt:
