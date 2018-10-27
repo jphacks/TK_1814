@@ -101,16 +101,18 @@ def post():
     hour = '' if results['hour'] == '' else results['hour'].zfill(2)
     min = '' if results['min'] == '' else results['min'].zfill(2)
 
+    limit = None
+
     if date == '' and hour == '':
         limit = None
     elif date != '' and hour == '':
-        limit = DT.strptime('{}'.format(date), '%Y-%m-%d 09:00:00')
+        limit = DT.strptime('{}'.format(date), '%Y-%m-%d')
     elif date != '' and hour != '':
         limit = DT.strptime('{} {}:{}'.format(date, hour, min.zfill(2)), '%Y-%m-%d %H:%M')
 
     new_promise = Promise(
         master_user_id=user.id,
-        limit_date= limit,
+        limit_date=limit,
         content=results['content']
     )
 
