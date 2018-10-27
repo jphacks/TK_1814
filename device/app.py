@@ -30,9 +30,11 @@ touchLogList = []
 word = ''
 axisVal = [0.0, 0.0, 0.0]
 axisPrevVal = [0.0, 0.0, 0.0]
+promiseID = 0
 
 def record():
   global status
+  global promiseID
 
   status = 'RECORD'
 
@@ -82,7 +84,8 @@ def record():
   r = requests.post(URL, files=files, data=data)
   print(r)
   print(r.json())
-  #TODO 返ってきたidを保存する処理(この後の、振動検知時に投げるのに使用)
+
+  promiseID = r.json()['promise']['id'] 
 
   
 def readadc(adcnum):
@@ -127,6 +130,7 @@ def checkTouch():
   global numOfTouch
   global touchLogList
   global status
+  global promiseID
 
   axisVal[0] = readadc(0)
   axisVal[1] = readadc(1)
@@ -142,7 +146,7 @@ def checkTouch():
       url = 'https://pinky.kentaiwami.jp/motion'
       s = requests.session()
       headers = {"Content-Type" : "application/json"}
-      params = {'promise_id':24, 'created_at':nowStr, 'user_id':USER_ID}
+      params = {'promise_id':promiseID, 'created_at':nowStr, 'user_id':USER_ID}
       r = s.post(url, data=json.dumps(params),headers=headers)
       print(r.text.encode('utf-8'))
         
