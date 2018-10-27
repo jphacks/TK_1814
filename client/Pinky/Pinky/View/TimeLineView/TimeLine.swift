@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import AlamofireImage
+import SwipeCellKit
 
 class TimeLine: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
@@ -80,6 +81,40 @@ class TimeLine: UIViewController, UITableViewDelegate, UITableViewDataSource{
         
         // タップ時の処理を記述
         
+    }
+    
+//    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]?
+//    {
+//        let delete = TableViewRowAction(style: UITableViewRowAction.Style.default, title: "hoge") { action, indexPath in }
+//        delete.image = UIImage(named: "check")
+//
+//        let sharing = TableViewRowAction(style: UITableViewRowAction.Style.default, title: "huga") { action, indexPath in }
+//        sharing.backgroundColor = UIColor.lightGray
+//        sharing.image = UIImage(named: "comp")
+//
+//        return [delete, sharing]
+//    }
+    @available(iOS 11.0, *)
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let check =  UIContextualAction(style: .normal, title: "Check", handler: { (action,view,completionHandler ) in
+            //do stuff
+            
+            completionHandler(true)
+        })
+        check.image = UIImage(named: "check")
+        check.backgroundColor = UIColor(hex: "DB4F4A")
+        
+        let comp =  UIContextualAction(style: .normal, title: "Complete", handler: { (action,view,completionHandler ) in
+            //do stuff
+            completionHandler(true)
+        })
+        comp.image = UIImage(named: "comp")
+        comp.backgroundColor = UIColor(hex: "4A4A4A")
+        
+        let confrigation = UISwipeActionsConfiguration(actions: [check, comp])
+        
+        return confrigation
     }
     
     func callAPI(){
