@@ -76,7 +76,6 @@ def record():
   
   status = 'PROMISE'
 
-  status = 'PROMISE'
   URL = 'https://pinky.kentaiwami.jp/record'
   files = {'wav': open(WAVE_OUTPUT_FILENAME, 'rb')}
   data = {'id': '9'}
@@ -138,7 +137,7 @@ def checkTouch():
       now = datetime.datetime.now()
       nowStr = now.strftime("%Y-%m-%d %H:%M:%S")
       print("yay its touching!!")
-      sleep(1)
+      sleep(0.5)
 
       url = 'https://pinky.kentaiwami.jp/motion'
       s = requests.session()
