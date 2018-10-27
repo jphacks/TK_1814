@@ -76,6 +76,11 @@ class TimeLine: UIViewController, UITableViewDelegate, UITableViewDataSource{
         )
         cell.profileImg.af_setImage(withURL: URL(string: pro[indexPath.row].img)!, filter: filter)
         
+        if pro[indexPath.row].one_side_done != 0 {
+            cell.compLabel.isHidden = false
+        }else{
+            cell.compLabel.isHidden = true
+        }
         return cell
     }
     
@@ -119,6 +124,7 @@ class TimeLine: UIViewController, UITableViewDelegate, UITableViewDataSource{
             .responseJSON{res in
                 
                 let json = JSON(res.value)
+                print(json)
                 let list = json["results"].arrayValue
                 (0 ..< list.count).forEach { (i) in
                     var tmp = Promise(content: list[i]["content"].stringValue,
@@ -127,7 +133,7 @@ class TimeLine: UIViewController, UITableViewDelegate, UITableViewDataSource{
                                       img: list[i]["img"].stringValue,
                                       is_master: list[i]["is_master"].boolValue,
                                       limited_at: list[i]["limited_at"].stringValue,
-                                      one_side_done: list[i]["one_side_done"].boolValue,
+                                      one_side_done: list[i]["one_side_done"].intValue,
                                       name: list[i]["name"].stringValue
                     )
                     self.pro.append(tmp)

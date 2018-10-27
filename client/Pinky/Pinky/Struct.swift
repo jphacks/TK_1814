@@ -13,6 +13,6 @@ struct Promise{
     let img : String
     let is_master : Bool
     let limited_at : String
-    let one_side_done : Bool
+    let one_side_done : Int
     let name : String
 }

@@ -16,6 +16,7 @@ class TimeLineCell: UITableViewCell {
     @IBOutlet var profileName: UILabel!
     @IBOutlet var DateTime: UILabel!
     @IBOutlet var promise: UILabel!
+    @IBOutlet weak var compLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
