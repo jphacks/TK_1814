@@ -93,7 +93,7 @@ class TimeLine: UIViewController, UITableViewDelegate, UITableViewDataSource{
                 if self.count {
                     self.count = false
                 }else{
-                    self.count = true
+                    self.show_alert()
                 }
 
                 completionHandler(true)
@@ -134,6 +134,30 @@ class TimeLine: UIViewController, UITableViewDelegate, UITableViewDataSource{
                 }
                 self.timeline.reloadData()
         }
+    }
+    
+    func show_alert() {
+        let alert: UIAlertController = UIAlertController(title: "達成の取り消し", message: "取り消しますか？", preferredStyle:  UIAlertController.Style.alert)
+        
+
+        let defaultAction: UIAlertAction = UIAlertAction(title: "はい", style: UIAlertAction.Style.default, handler:{
+            // ボタンが押された時の処理を書く（クロージャ実装）
+            (action: UIAlertAction!) -> Void in
+            self.count = true
+            print("OK")
+        })
+        // キャンセルボタン
+        let cancelAction: UIAlertAction = UIAlertAction(title: "キャンセル", style: UIAlertAction.Style.cancel, handler:{
+            // ボタンが押された時の処理を書く（クロージャ実装）
+            (action: UIAlertAction!) -> Void in
+            self.count = false
+            print("Cancel")
+        })
+        
+        alert.addAction(cancelAction)
+        alert.addAction(defaultAction)
+        
+        present(alert, animated: true, completion: nil)
     }
     
     /********************* Pull to refresh関連 *********************/
