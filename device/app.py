@@ -5,6 +5,7 @@ from time import sleep
 import RPi.GPIO as GPIO
 import datetime
 import requests
+import json
 
 MICPIN = 4
 SPICS = 8
@@ -12,6 +13,7 @@ SPIMISO = 9
 SPIMOSI = 10
 SPICLK = 11
 LEDPIN = 17
+USER_ID = 9
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(MICPIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
@@ -132,26 +134,25 @@ def checkTouch():
   axisVal[2] = readadc(2)
 
   if axisPrevVal[0] != 0.0:
-    if numOfTouch < 2:
-      if axisVal[0] - axisPrevVal[0] > 1000 or axisVal[1] - axisPrevVal[1] > 1000 or axisVal[2] - axisPrevVal[2] > 1000:
-        numOfTouch = numOfTouch + 1
-        now = datetime.datetime.now()
-        nowStr = now.strftime("%Y/%m/%d %H:%M:%S.%L")
-        touchLog = 'touch{}:{}'.format(numOfTouch, now)
-        touchLogList.append(touchLog)
-        print("yay its touching!!")
-        sleep(1)
+    if axisVal[0] - axisPrevVal[0] > 1000 or axisVal[1] - axisPrevVal[1] > 1000 or axisVal[2] - axisPrevVal[2] > 1000:
+      now = datetime.datetime.now()
+      nowStr = now.strftime("%Y-%m-%d %H:%M:%S")
+      print("yay its touching!!")
+      sleep(1)
 
-    if numOfTouch == 2:
-       status = 'WAIT'
-       print(touchLogList)
-
-  axisPrevVal[0] = axisVal[0]
-  axisPrevVal[1] = axisVal[1]
-  axisPrevVal[2] = axisVal[2]
-  print(axisVal)
-  print(axisPrevVal)
-  sleep(0.2)
+      url = 'https://pinky.kentaiwami.jp/motion'
+      s = requests.session()
+      headers = {"Content-Type" : "application/json"}
+      params = {'promise_id':24, 'created_at':nowStr, 'user_id':USER_ID}
+      r = s.post(url, data=json.dumps(params),headers=headers)
+      print(r.text.encode('utf-8'))
+        
+   axisPrevVal[0] = axisVal[0]
+   axisPrevVal[1] = axisVal[1]
+   axisPrevVal[2] = axisVal[2]
+   print(axisVal)
+   print(axisPrevVal)
+   sleep(0.2)
 
   
 def micCallback(channnel):
