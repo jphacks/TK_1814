@@ -69,7 +69,7 @@ def record():
   wf.writeframes(b''.join(frames))
   wf.close()
   
-  status = 'WAIT'
+  status = 'PROMISE'
 
 
 def readadc(adcnum):
