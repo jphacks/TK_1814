@@ -1,6 +1,9 @@
-
+import pyaudio
+import wave
+import numpy as np
 from time import sleep
 import RPi.GPIO as GPIO
+
 MICPIN = 4
 LEDPIN = 17
 
