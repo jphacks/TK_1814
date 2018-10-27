@@ -1,33 +1,27 @@
 from flask import Blueprint, jsonify, request
 from database import session
 from model import User, Promise, Motion
-import os
 from datetime import datetime as DT
-import datetime
 
 app = Blueprint('motion_bp', __name__)
 
 
 @app.route('/motion', methods=['POST'])
 def post():
+    # user_id
+    # promise_id -1ならNone
+    # created_at 2012-12-29 13:49:37の形式
 
-    # マッチング判定
-    # モーションテーブルから近い時刻のレコードがあるか検索。
-    # なかったら、モーションテーブルに時刻を追加。
-    start = DT.now()
+    user = session.query(User).filter(User.id == request.json['user_id']).one_or_none()
+    promise = session.query(Promise).filter(Promise.id == request.json['promise_id']).one_or_none()
 
-    print('******************:')
-    print(start)
-    print(start - datetime.timedelta(seconds=5))
-    print('******************:')
+    motion = Motion()
+    motion.user_id = user.id
+    motion.promise_id = None if promise is  None else promise.id
+    motion.created_at = DT.strptime(request.json['created_at'], '%Y-%m-%d %H:%M:%S')
 
-    # motion = session.query(Motion).filter(Motion.created_at.between())
-
-    ### 約束IDあり
-    # あったら、そのレコードにあるユーザIDを持ってきて約束テーブルの該当レコードに追記。
-    #
-    # ### 約束IDなし
-    # あったら、そのレコードにあるユーザIDと約束IDを持ってきて、約束テーブルの該当レコードに追記。
-
+    session.add(motion)
+    session.commit()
+    session.close()
 
     return jsonify({'results': 'OK'}), 200
