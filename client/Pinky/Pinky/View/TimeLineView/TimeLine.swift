@@ -10,7 +10,6 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import AlamofireImage
-import SwipeCellKit
 
 class TimeLine: UIViewController, UITableViewDelegate, UITableViewDataSource{
     

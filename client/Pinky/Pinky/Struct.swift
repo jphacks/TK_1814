@@ -17,3 +17,10 @@ struct Promise{
     let one_side_done : Int
     let name : String
 }
+
+struct Archives {
+    let count : Int
+    let name : String
+    let img : String
+    let user_id : Int
+}
