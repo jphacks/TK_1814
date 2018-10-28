@@ -31,18 +31,16 @@ class Archive: UIViewController, UICollectionViewDataSource, UICollectionViewDel
     override func viewWillAppear(_ animated: Bool) {
         let titleview = UIImageView(image: UIImage(named: "pinky_header"))
         self.navigationItem.titleView = titleview
-        //refresh()
+        refresh()
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
         
-        // "Cell" はストーリーボードで設定したセルのID
         let testCell:UICollectionViewCell =
             collectionView.dequeueReusableCell(withReuseIdentifier: "Cell",
                                                for: indexPath)
         
-        // Tag番号を使ってImageViewのインスタンス生成
         let imageView = testCell.contentView.viewWithTag(1) as! UIImageView
         let filter = AspectScaledToFillSizeWithRoundedCornersFilter(
             size: imageView.frame.size,
@@ -50,25 +48,32 @@ class Archive: UIViewController, UICollectionViewDataSource, UICollectionViewDel
         )
         imageView.af_setImage(withURL: URL(string: arch[indexPath.row].img)!, filter: filter)
         
-        // Tag番号を使ってLabelのインスタンス生成
         let label = testCell.contentView.viewWithTag(2) as! UILabel
         label.text = arch[indexPath.row].name
         
-        let label3 = testCell.contentView.viewWithTag(3) as! UILabel
-        label.text = String(arch[indexPath.row].count)
+        let label2 = testCell.contentView.viewWithTag(3) as! UILabel
+        label2.text = String(arch[indexPath.row].count)
         
         return testCell
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // section数は１つ
         return 1
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
-        // 要素数を入れる、要素以上の数字を入れると表示でエラーとなる
         return self.arch.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let horizontalSpace:CGFloat = 2
+        let cellSize:CGFloat = self.view.bounds.width/2 - horizontalSpace
+
+        return CGSize(width: cellSize, height: cellSize)
     }
     
     func callAPI(){
