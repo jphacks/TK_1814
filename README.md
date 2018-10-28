@@ -1,6 +1,6 @@
 # Pinky
 
-[![Product Name](image.png)](https://www.youtube.com/watch?v=G5rULR53uMk)
+[![Pinky](pinky_logo.png)](https://youtu.be/2zG1shL9Hxc)
 
 ## 製品概要
 ### 約束 X Tech
