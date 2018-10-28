@@ -122,14 +122,14 @@ class TimeLine: UIViewController, UITableViewDelegate, UITableViewDataSource{
                     
                 }
                 
-                if self.pro[indexPath.row].one_side_done == 0 {
-                    self.count = false
-                    
-                    self.putAPI(user_id: self.myID, index: indexPath.row)
-                }else{
-                    self.show_alert(index: indexPath.row)
-                    
-                }
+//                if self.pro[indexPath.row].one_side_done == 0 {
+//                    self.count = false
+//                    
+//                    self.putAPI(user_id: self.myID, index: indexPath.row)
+//                }else{
+//                    self.show_alert(index: indexPath.row)
+//                    
+//                }
 
                 completionHandler(true)
             })
